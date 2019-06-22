@@ -1,9 +1,14 @@
 import numpy as np
+import os.path 
+from SmallerData import SmallerDataCreator
+
 class FinalSolver:
     def __init__(self):
         self.y_weight = np.array([1.0, 1.0, 1.0])
 
     def readXTrain(self, path):
+        if not os.path.exists(path):
+            SmallerDataCreator().create(path)
         X_train = np.load(path)
         self.x_train = (X_train['arr_0'])
         X_train.close

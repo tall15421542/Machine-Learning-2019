@@ -97,6 +97,6 @@ if __name__ == '__main__':
         print("Validation: {}".format(solver.calculateValError()))
         print("\n###\n")
 
-    if writePredict != None:
+    if writePredict == "w":
         solver.writePredict(solver.x_test)
 
