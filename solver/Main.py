@@ -58,6 +58,7 @@ if __name__ == '__main__':
         solver.readYTrain("./dataset/Y_train_small_{}.npz".format(N_data))
         solver.readXValidation("./dataset/X_validation_{}.npz".format(N_data))
         solver.readYValidation("./dataset/Y_validation_{}.npz".format(N_data))
+        solver.readXTest("./dataset/X_test.npz")
     else: 
         solver.readXTrain("./dataset/X_train.npz")
         solver.readYTrain("./dataset/Y_train.npz")
@@ -97,5 +98,5 @@ if __name__ == '__main__':
         print("\n###\n")
 
     if writePredict != None:
-        solver.writePredict(solver.x_val)
+        solver.writePredict(solver.x_test)
 
