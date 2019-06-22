@@ -1,6 +1,8 @@
 # Machine Learning 2019
 ### before use solver
 ```
+git clone https://github.com/tall15421542/Machine-Learning-2019.git
+cd Machine-Learning-2019
 mv X_train.npz Y_train.npz X_test.npz solver/dataset
 ```
 ## solver
