@@ -28,10 +28,12 @@ class FinalSolver:
         self.y_val = (Y_validation['arr_0'])
         Y_validation.close
 
-    def setModel(self, model):
+    def setModel(self, modelName, model):
+        self.model_name = modelName
         self.model = model 
 
-    def setPreprocessor(self, preprocessor):
+    def setPreprocessor(self, preprocessorName, preprocessor):
+        self.preprocessor_name = preprocessorName 
         self.preprocessor = preprocessor 
 
     def preprocessData(self, topk):
@@ -67,3 +69,19 @@ class FinalSolver:
                x_data = self.preprocessor.process(x_data)
 
         return self.loss(self.predict(x_data), y_data)
+
+    def writePredict(self, x_data):
+        if hasattr(self, 'preprocessor_name'):
+            pred_fileName = './predict/{}-{}-predict.csv'.format(self.preprocessor_name, self.model_name)
+        else: 
+            pred_fileName = './predict/{}-predict.csv'.format(self.model_name)
+        pred_file = open(pred_fileName,"w")
+
+        test_y = self.predict(x_data)
+
+        #write prediction file
+        for i in range(test_y.shape[0]):
+            pred_file.write(str(test_y[i,0])+","+str(test_y[i,1])+","+str(test_y[i,2]))
+            if i != test_y.shape[0]-1:
+                    pred_file.write("\n")
+        print("write predict done!")

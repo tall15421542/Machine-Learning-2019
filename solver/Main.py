@@ -19,6 +19,7 @@ import numpy as np
 N_data = int(sys.argv[1])
 selected_preprocessor = sys.argv[2]
 selected_model = sys.argv[3]
+writePredict = sys.argv[4]
 
 preprocessor_option = {
         "randomforest": RandomForestPreprocessor(),
@@ -69,14 +70,14 @@ if __name__ == '__main__':
     # preprocess
     if selected_preprocessor != "n":
         solver.scaleY(np.array([300.0, 1.0, 200.0]))
-        solver.setPreprocessor(preprocessor_option[selected_preprocessor])
+        solver.setPreprocessor(selected_preprocessor, preprocessor_option[selected_preprocessor])
         solver.preprocessData(N_selected_feature)
         print("x_train shape after preprocess: {}".format(solver.x_train.shape))
         print("preprocessDone")
         print("\n###\n")
 
     # model train
-    solver.setModel(model_option[selected_model])
+    solver.setModel(selected_model, model_option[selected_model])
     solver.fit()
     print("\n###\n")
 
@@ -94,4 +95,7 @@ if __name__ == '__main__':
     if N_data != -1:
         print("Validation: {}".format(solver.calculateValError()))
         print("\n###\n")
+
+    if writePredict != None:
+        solver.writePredict(solver.x_val)
 
