@@ -1,0 +1,10 @@
+from sklearn.decomposition import PCA
+class PCAPreprocessor:
+    def __init__(self):
+        self.pca = None
+
+    def process(self, x_data, y_data = 0, topk = 0):
+        if self.pca == None:
+            self.pca = PCA(n_components = topk)
+            self.pca.fit(x_data)
+        return self.pca.transform(x_data)
