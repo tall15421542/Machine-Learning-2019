@@ -70,5 +70,6 @@ preprocessor_option = {
 }
 ```
 ### Example usage under ``solver/``
-``python3 Main.py 100 randomforest randomforest n``
+``python3 Main.py 100 randomforest randomforest n``  
+
 ``python3 Main.py 100 n svr w``
