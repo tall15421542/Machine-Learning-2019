@@ -5,31 +5,38 @@
 python3 Main.py [N_data] [Data_Preprocessor] [model] [writePredict]
 ```
 #### N_data: int
-size for trainning data and validation data
-if ``N_data == -1``
-Use ``X_train.npz``, ``Y_train.npz`` as trainning data
+size for trainning data and validation data 
+
+if ``N_data == -1`` 
+
+Use ``X_train.npz``, ``Y_train.npz`` as trainning data 
 
 #### Data_Preprocessor 
-preprocessor's registered name
-if ``Data_Preprocessor == 'n'``
+preprocessor's registered name 
+
+if ``Data_Preprocessor == 'n'`` 
+
 ``Data_preprocessor`` is not used
 
 #### model 
 model's registered name
 
 #### writePredict
-if `` writePredict == "w"``
+if `` writePredict == "w"`` 
+
 write test's predict under ``predict/`` folder 
 
-if preprocessor == "n"
+if preprocessor == "n" 
+
 file's name is ``{model's name}-predict.csv``  
 
-else
-file's name  is ``{preprocessor's name}-{model's name}-predict.csv``
+else 
+
+file's name  is ``{preprocessor's name}-{model's name}-predict.csv`` 
 
 
 ### add new model
-1. create class with ``predict`` and ``fit`` method implementation under ``model/``
+1. create class with ``predict`` and ``fit`` method implementation under ``model/`` 
 ```python
 class Model:
     def fit(self, x_data, y_data):
