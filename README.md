@@ -1,7 +1,7 @@
 # Machine Learning 2019
 ### before use solver
 ```
-mv X_train.npz Y_train.npz X_test.npz solver/
+mv X_train.npz Y_train.npz X_test.npz solver/dataset
 ```
 ## solver
 ### Usage
