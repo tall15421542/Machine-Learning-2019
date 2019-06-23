@@ -8,3 +8,13 @@ class PCAPreprocessor:
             self.pca = PCA(n_components = topk)
             self.pca.fit(x_data)
         return self.pca.transform(x_data)
+
+    def report(self):
+        print("components_")
+        print(self.pca.components_)
+        print("explanined_variance_ratio")
+        print(self.pca.explained_variance_ratio_)
+        print("mean")
+        print(self.pca.mean_)
+        print("noise_variance")
+        print(self.pca.noise_variance_)

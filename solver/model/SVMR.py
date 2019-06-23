@@ -6,7 +6,7 @@ class SVMR():
     def __init__(self, n_dim):
         self.model = []
         for i in range(n_dim):
-            self.model.append(SVR())
+            self.model.append(SVR(kernel='linear'))
 
     def fit(self, x_data, y_data):
         for index, svr in enumerate(self.model):
@@ -18,5 +18,7 @@ class SVMR():
             predict_y.append(svr.predict(x_data))
         return np.array(predict_y).transpose() 
     
-
+    def report(self):
+        for idx, model in enumerate(self.model):
+            print("Dim[{}], Number of SV: {}".format(idx, len(model.support_vectors_)))
 

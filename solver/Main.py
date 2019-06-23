@@ -15,11 +15,13 @@ from finalSolver import FinalSolver
 from itertools import product
 from math import fabs
 import numpy as np 
+from lgbm import LGBM 
 
 N_data = int(sys.argv[1])
 selected_preprocessor = sys.argv[2]
-selected_model = sys.argv[3]
-writePredict = sys.argv[4]
+N_selected_feature = int(sys.argv[3]) 
+selected_model = sys.argv[4]
+writePredict = sys.argv[5]
 
 preprocessor_option = {
         "randomforest": RandomForestPreprocessor(),
@@ -28,7 +30,10 @@ preprocessor_option = {
 
 model_option = {
     "svr": SVMR(3),
-    "randomforest": RandomForestRegressor(criterion = "mae", n_jobs = -1)
+    "randomforest": RandomForestRegressor(
+                criterion = "mae", n_jobs = -1, n_estimators = 100, min_samples_leaf = 0.01,
+                max_features = "sqrt", warm_start = True, oob_score = True),
+    "lgbm": LGBM(),
 }
 
 # loss function 
@@ -50,7 +55,6 @@ def NAE(y, y_hat):
 
 
 if __name__ == '__main__':
-    N_selected_feature = 100 
 
     solver = FinalSolver()
     if N_data != -1:
@@ -62,6 +66,7 @@ if __name__ == '__main__':
     else: 
         solver.readXTrain("./dataset/X_train.npz")
         solver.readYTrain("./dataset/Y_train.npz")
+        solver.readXTest("./dataset/X_test.npz")
 
     print("trainning shape")
     print("x: {}".format(solver.x_train.shape))
@@ -74,6 +79,7 @@ if __name__ == '__main__':
         solver.setPreprocessor(selected_preprocessor, preprocessor_option[selected_preprocessor])
         solver.preprocessData(N_selected_feature)
         print("x_train shape after preprocess: {}".format(solver.x_train.shape))
+        print(solver.preprocessor.report())
         print("preprocessDone")
         print("\n###\n")
 
@@ -99,4 +105,7 @@ if __name__ == '__main__':
 
     if writePredict == "w":
         solver.writePredict(solver.x_test)
+    
+    if hasattr(solver.model, "report"):
+        solver.model.report()
 

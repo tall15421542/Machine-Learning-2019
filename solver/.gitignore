@@ -1,2 +1,4 @@
 *.swp
 __*/
+LightGBM/
+.DS_Store
